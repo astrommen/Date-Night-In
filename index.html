@@ -12,6 +12,10 @@
   <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
   <script src="https://code.jquery.com/jquery.js"></script>
 
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
 
 </head>
 
@@ -19,7 +23,7 @@
 
   <div class="row">
     <nav class="navbar navbar-dark bg-dark fixed-top nav">
-      <a class="navbar-brand glyphicon glyphicon-heart" href="#"></a>
+      <a class="navbar-brand glyphicon glyphicon-heart heart" href="#"></a>
       <a class="navbar-brand glyphicon glyphicon-user" href="#"></a>
       <a class="navbar-brand glyphicon glyphicon-home" href="#"></a>
       <div class="text-center KITK"></div>
@@ -33,6 +37,7 @@
       <br> Just let us know what
       you're in the mood for.</small>
     </div>
+  </div>
 
     <div class="row">
       <div class="jumbotron jumbotron-fluid">
@@ -45,22 +50,37 @@
     </div>
 
     <div class="row">
+      <div class="container description">
+        <h2> Choose a movie! </h2>
+        <small class="text-muted">These moves would be a great choice for the meal you're looking to make.</small>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="container movies">
         movies go here
       </div>
     </div>
 
     <div class="row">
-      <div class="container recipes">
-        recipes
+      <div class="container description">
+        <h2> Choose a recipe! </h2>
+        <small class="text-muted">All of the internet's best recipes in one place.</small>
       </div>
     </div>
 
+    <div class="row">
+      <div class="container recipes">
+        recipes go here
+      </div>
+    </div>
+
+    <div class="row">&nbsp;</div>
    
   <div class="row">
     <div class="container footer">
 
     </div>
   </div>
-
+</body>
 </html>
