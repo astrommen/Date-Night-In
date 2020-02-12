@@ -1,14 +1,15 @@
 $(document).ready(function() {
 
+    var recipes = [];
+    $("#submit").on("click", function() {
+        var x = $("#choice").val().trim();
 
-
-    var x = "italian";
     var spoonQuery = "https://api.spoonacular.com/recipes/search?query=" + 
         x + "&number=10&apiKey=b998635bd1cd4b36826270ed3c112703";
 
     var y = "romance";  
     var ombdQuery = "http://img.omdbapi.com/?apikey=trilogy&t="  
-
+    });
     // API call
     $.ajax({
         url: spoonQuery,
@@ -30,6 +31,17 @@ $(document).ready(function() {
         });
         
     });
-
+    
+    function displayButtons() {
+        $("#myButtons").empty();
+        for (var i = 0; i < recipes.length; i++) {
+          var a = $('<button class="btn btn-primary">');
+          a.attr("id", "show");
+          a.attr("data-search", recipes[i]);
+          a.text(recipes[i]);
+          $("#userchoice").append(a);
+        }
+      }
+      displayButtons();
 
 });
