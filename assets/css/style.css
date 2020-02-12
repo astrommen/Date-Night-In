@@ -1,0 +1,29 @@
+/* body {
+    background-image: url(../images/background.jpg);
+} */
+
+a {
+    color: #ffffff;
+}
+
+.nav {
+    background-color: #2B2D2F; 
+    padding: 15px;
+}
+
+.searchbox {
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+    justify-content: center;
+}
+
+.searchbox1 {
+    padding: 30px;
+}
+
+.description {
+    text-align: center;
+    justify-content: center;
+    padding: 1%;
+}
