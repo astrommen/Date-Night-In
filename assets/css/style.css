@@ -27,3 +27,14 @@ a {
     justify-content: center;
     padding: 1%;
 }
+.heart {
+    margin-left: 3%;
+}
+
+.movies {
+    border: 1px solid #2B2D2F;
+}
+
+.recipes {
+    border: 1px solid #2B2D2F;
+}
