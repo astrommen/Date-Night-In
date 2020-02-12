@@ -6,6 +6,10 @@ a {
     color: #ffffff;
 }
 
+a:hover {
+    color: darkred;
+  }
+
 .nav {
     background-color: #2B2D2F; 
     padding: 15px;
