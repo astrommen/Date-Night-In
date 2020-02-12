@@ -14,10 +14,22 @@ $(document).ready(function() {
         url: spoonQuery,
         method: "GET",
     })
-    .then(function(response) {
-        console.log(response.data);
+    .then(function(response) { console.log(response);
+       
+
+        var results = response.results;
+
+        $.each(results, function(index){
+                
+            var pRecipe = $("<p>");
+
+            pRecipe.html(results[index].title);
+
+            $(".recipes").append(pRecipe);
+    
+        });
         
-    })
+    });
 
 
-})
+});
