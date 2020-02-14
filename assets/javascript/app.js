@@ -57,6 +57,9 @@ $(document).ready(function() {
     
     //User Recipe submission
     $("#myDropdown").on("change", function() {
+
+        $(".movies").empty();
+        $(".recipes").empty();
     
         var x = $(this).val(); console.log(x);
         
@@ -70,6 +73,7 @@ $(document).ready(function() {
         
         var y = Math.floor(Math.random() * 520,176 + 1); // what is this for?
 
+        //temp disabled because its rated limited
         var tmdbQuery = "https://api.themoviedb.org/3/discover/movie?api_key=" +
         "0c26415454ad6b4927743c99caee27b5&language=en-US&sort_by=popularity.desc&include_adult=" +
         "true&include_video=false&page=5&with_genres="+ x; //found a way to make it random by page #
@@ -114,21 +118,34 @@ $(document).ready(function() {
         var results = response.results;
         
         var movieDiv = $(".movies"); // assign var to div for modularity
+
+        var movieSwiper = $("<div class='swiper-wrapper'>"+"</div>");
         
         var tmdbImgUrl = "https://image.tmdb.org/t/p/w220_and_h330_face/";
+
+        movieDiv.append(movieSwiper);
         
         $.each(results, function(index) {
             
+            // create new img tags for 
+            var movieImgDiv = $("<div>");
+
             // create new img tags for 
             var movieImg = $("<img>");
             
             // adds src link to img tag
             movieImg.attr("src", tmdbImgUrl + results[index].poster_path); 
+
+            movieImgDiv.hasClass("swiper-slide");
             
-            // appends img tag to movie div
-            movieDiv.append(movieImg);
+            // appends img to img div
+            movieImgDiv.append(movieImg);
+
+            // appends img div to movie div
+            movieSwiper.append(movieImgDiv);
 
         })
+
         // Pushing recipe to database
        database.push({
            recipes: pRecipe,

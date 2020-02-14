@@ -20,6 +20,9 @@
 
   <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
+  <!-- Link to Swiper.css for Horiz Scroll Effect -->
+  <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css" />
+
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
   
   <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
@@ -69,7 +72,7 @@
   </div>
 
   <!--dropdown area-->
-  
+
   <!-- tmdb genre id list:
     excited/adventure = 12,funny/comedy = 35
     emotional/drama = 18, happy/fantasy = 14, 
@@ -77,17 +80,16 @@
     inspired/science fiction = 878  -->
 
   <div class="jumbotron searchbox bgjumbo">
-    <select class="custom-select custom-select-lg mb-3" id="myDropdown" data-hover="dropdown">
+    <select class="custom-select custom-select-lg mb-3" id="myDropdown">
       <option selected>What are you feeling?</option>
-        <option value="14">Happy</option>
-        <option value="10749">Romantic</option>
-        <option value="27">Scary</option>
-        <option value="12">Excited</option>
-        <option value="35">Funny</option>
-        <option value="18">Emotional</option>
-        <option value="878">Inspired</option>
+      <option value="14">Happy</option>
+      <option value="10749">Romantic</option>
+      <option value="27">Scary</option>
+      <option value="12">Excited</option>
+      <option value="35">Funny</option>
+      <option value="18">Emotional</option>
+      <option value="878">Inspired</option>
     </select>
-    </div> 
   </div>
 
   <!-- movies -->
@@ -99,8 +101,10 @@
   </div>
 
   <div class="row">
-    <div class="container movies">
+    <div class="container swiper-container movies">
    movies
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
     </div>
   </div>
 <!--recipe-->
@@ -126,6 +130,9 @@
     </div>
   </div>
   <script src="assets/javascript/app.js"></script>
+
+  <!-- Link to Swiper JS for Horiz Scroll Effect -->
+  <script src="assets/javascript/swiper.min.js"></script>
 </body>
 
 </html>
