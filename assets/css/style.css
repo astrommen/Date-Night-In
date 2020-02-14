@@ -16,14 +16,12 @@ a:hover {
 }
 
 .searchbox {
-    padding: 20px;
-    width: 60%;
     text-align: center;
     justify-content: center;
 }
 
-.searchbox1 {
-    padding: 30px;
+.dropwidth {
+    width: 40%;
 }
 
 .description {
@@ -41,4 +39,9 @@ a:hover {
 
 .recipes {
     border: 1px solid #2B2D2F;
+}
+
+.bgjumbo {
+    padding: 100px;
+    background-image: url(../images/cooking.png);
 }
