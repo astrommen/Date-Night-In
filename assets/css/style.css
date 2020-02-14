@@ -12,7 +12,7 @@ a:hover {
 
 .nav {
     background-color: #2B2D2F; 
-    padding: 15px;
+    padding: 25px;
 }
 
 .searchbox {
@@ -21,13 +21,16 @@ a:hover {
 }
 
 .dropwidth {
-    width: 40%;
+    width: 65%;
+    background-color: #ffffff;
+    color: #2B2D2F;
+    border: 1px solid #2B2D2F;
 }
 
 .description {
     text-align: center;
     justify-content: center;
-    padding: 1%;
+    padding: 40px;
 }
 .heart {
     margin-left: 3%;
@@ -44,4 +47,5 @@ a:hover {
 .bgjumbo {
     padding: 100px;
     background-image: url(../images/cooking.png);
+    border: 1px solid #2B2D2F;
 }
