@@ -16,19 +16,20 @@ $(document).ready(function() {
     // Convert Firebase into variable
     var database = firebase.database().ref();
     
-    //Variables for Email and Password
-    var email = $("#email").val().trim();
-    var password = $("#password").val().trim();
-
+    
     // Create new user acct
     $("#create").on("click", function () {
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
+        event.preventDefault();
+        //Variables for Email and Password
+        let email = $("#email").val().trim();
+        let password = $("#password").val().trim();
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
       });
-      $(".info").val() = "";  
+    //   $(".info").val() = "";  
     });
 
     // Sign In User
@@ -40,7 +41,7 @@ $(document).ready(function() {
         // ...
       });
     //   clearing input values
-    $(".info").val() = "";  
+    // $(".info").val() = "";  
     });
 
     // Sign Out User 
@@ -51,7 +52,7 @@ $(document).ready(function() {
             // An error happened.
           });
         // clearing input values
-        $(".info").val() = ""; 
+        // $(".info").val() = ""; 
         });
     
     //User Recipe submission
