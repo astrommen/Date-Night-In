@@ -12,7 +12,6 @@ $(document).ready(function() {
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
     
     // Convert Firebase into variable
     var database = firebase.database().ref();
@@ -22,12 +21,15 @@ $(document).ready(function() {
     var password = $("#password").val().trim();
 
     // Create new user acct
+    $("#create").on("click", function () {
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
       });
+      $(".info").val() = "";  
+    });
 
     // Sign In User
     $("#signin").on("click", function() {
@@ -42,7 +44,7 @@ $(document).ready(function() {
     });
 
     // Sign Out User 
-    $("#create").on("click", function () {
+    $("#signout").on("click", function () {
         firebase.auth().signOut().then(function() {
           // Sign-out successful.
           }).catch(function(error) {
@@ -54,17 +56,21 @@ $(document).ready(function() {
     
     //User Recipe submission
     $("#submit").on("click", function() {
+        var x = $("#choice").val().trim();
         
-    var x = "italian";
-    var edamamQuery = "https://api.edamam.com/search?q=" + 
+        var edamamQuery = "https://api.edamam.com/search?q=" + 
         x + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=10";
 
         //https://webknox.com/recipeImages/swiss-cheese-fondue-with-english-stilton-773508.jpeg
         //https://api.spoonacular.com/recipes/search?query=fondue&number=10&apiKey=70f3c998a06f47cfbcc87a31f2ed8aae
         
-    var y = "10749";  //tmdb genre id for romance is 10749
+    // var y = "10749";  
+    //tmdb genre id for romance is 10749
+        var y = Math.floor(Math.random() * 520,176 + 1);
 
-    var tmdbQuery = "https://api.themoviedb.org/3/discover/movie?api_key=0c26415454ad6b4927743c99caee27b5&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=5&with_genres="+ y; //found a way to make it random by page #
+        var tmdbQuery = "https://api.themoviedb.org/3/discover/movie?api_key=" +
+        "0c26415454ad6b4927743c99caee27b5&language=en-US&sort_by=popularity.desc&include_adult=" +
+        "true&include_video=false&page=5&with_genres="+ y; //found a way to make it random by page #
 
     // API call
     $.ajax({
@@ -127,18 +133,5 @@ $(document).ready(function() {
         })
         
     });
-});
-    function displayButtons() {
-        $("#myButtons").empty();
-        for (var i = 0; i < recipes.length; i++) {
-          var a = $('<button class="btn btn-primary">');
-          a.attr("id", "show");
-          a.attr("data-search", recipes[i]);
-          a.text(recipes[i]);
-          $("#userchoice").append(a);
-        }
-      }
-      displayButtons();
-    
-    
+});  
 });
