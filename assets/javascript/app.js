@@ -52,7 +52,9 @@ $(document).ready(function() {
         $(".info").val() = ""; 
         });
     
-
+    //User Recipe submission
+    $("#submit").on("click", function() {
+        
     var x = "italian";
     var edamamQuery = "https://api.edamam.com/search?q=" + 
         x + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=10";
@@ -125,6 +127,7 @@ $(document).ready(function() {
         })
         
     });
+});
     function displayButtons() {
         $("#myButtons").empty();
         for (var i = 0; i < recipes.length; i++) {
