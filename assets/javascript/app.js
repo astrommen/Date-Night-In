@@ -93,19 +93,19 @@ $(document).ready(function() {
         var y = "";
         
         // code to pair recipe query w/ genre dropdown selection
-        if (x === "12"){
+        if (x === "12"){ // excited/adventure
             y = "tapas";
-        } else if (x === "35") {
+        } else if (x === "35") { // funny/comedy
             y = "fried";
-        } else if (x === "18") {
+        } else if (x === "18") { // emotional/drama
             y = "pastries";
-        } else if (x === "14") {
+        } else if (x === "14") { // happy/fantasy
             y = "fondue";
-        } else if (x === "27") {
+        } else if (x === "27") { // scary/horror
             y = "tacos";
-        } else if (x === "10749") {
+        } else if (x === "10749") { // romance
             y = "italian";
-        } else if (x === "878") {
+        } else if (x === "878") { // inspired/science fiction
             y = "breakfast";
         }
 
@@ -118,74 +118,83 @@ $(document).ready(function() {
         "0c26415454ad6b4927743c99caee27b5&language=en-US&sort_by=popularity.desc&include_adult=" +
         "true&include_video=false&page=5&with_genres="+ x; //found a way to make it random by page # (n2h)
 
-    // recipe API call
-    $.ajax({
-        url: edamamQuery,
-        method: "GET",
-    })
-    .then(function(response) { console.log(response);
-       
-        var results = response.hits;
-
-        var recipeDiv = $(".recipes");
-
-        $.each(results, function(index){
+        
+        // movie API call
+        $.ajax({
+            url: tmdbQuery,
+            method: "GET",
+        })
+        .then(function(response) { console.log(response);// for FTP only
             
-            var recipeTitle = $("<p>");
-
-            recipeTitle.text(results[index].recipe.label);
-
-            var recipeImg = $("<img>");
-
-            recipeImg.attr("src", results[index].recipe.image);
-
-            recipeDiv.append(
-                recipeTitle,
-                recipeImg
-            );
-    
-        });
-        
-    });
-    
-    // movie API call
-    $.ajax({
-        url: tmdbQuery,
-        method: "GET",
-    })
-    .then(function(response) { console.log(response);// for FTP only
-        
-        // assign API response results to var for modularity
-        var results = response.results;
-        
-        // assign html div to var for modularity
-        var swiperWrapper = $(".swiper-wrapper");
-        
-        // assign poster path to var for modularity
-        var tmdbImgUrl = "https://image.tmdb.org/t/p/w220_and_h330_face/";
-
-        // cycles through results + creates the following
-        $.each(results, function(index) {
+            // assign API response results to var for modularity
+            var results = response.results;
             
-            // create new img tags for 
-            var movieImgDiv = $("<div>");
-
-            // adds swiper-slide class
-            movieImgDiv.addClass("swiper-slide");
-
-            // adds image path per swiper cdn
-            movieImgDiv.attr("style", "background-image:url("+ tmdbImgUrl + results[index].poster_path + ")");
-
-            // appends img div to movie div
-            swiperWrapper.append(movieImgDiv);
+            // assign html div to var for modularity
+            var swiperWrapper = $(".swiper-wrapper");
+            
+            // assign poster path to var for modularity
+            var tmdbImgUrl = "https://image.tmdb.org/t/p/w220_and_h330_face/";
+            
+            // cycles through results + creates the following
+            $.each(results, function(index) {
+                
+                // create new img tags for movies
+                var movieImgDiv = $("<div>");
+                
+                // adds swiper-slide class
+                movieImgDiv.addClass("swiper-slide");
+                
+                // adds image path per swiper cdn
+                movieImgDiv.attr("style", "background-image:url("+ tmdbImgUrl + results[index].poster_path + ")");
+                
+                // appends img div to movie div
+                swiperWrapper.append(movieImgDiv);
+            });
+            
+            // Pushing recipe to database
+            database.push({
+                recipes: pRecipe,
+            });
+            
         });
 
-        // Pushing recipe to database
-       database.push({
-           recipes: pRecipe,
-       });
+        // recipe API call
+        $.ajax({
+            url: edamamQuery,
+            method: "GET",
+        })
+        .then(function(response) { console.log(response);
+            
+            // assign API response to var for modularity
+            var hits = response.hits;
+
+            // assign html div to var for modularity
+            var recipeDiv = $(".recipes");
+
+            // cycles through results + creates the following
+            $.each(hits, function(index){
+                
+                // creates new p tag for recipes
+                var recipeTitle = $("<p>");
+
+                // adds recipe title
+                recipeTitle.text(hits[index].recipe.label);
+
+                // creates new image tag 
+                var recipeImg = $("<img>");
+
+                // adds image path to src attr in img tag
+                recipeImg.attr("src", hits[index].recipe.image);
+
+                // appends both to html recipe div
+                recipeDiv.append(
+                    recipeTitle,
+                    recipeImg
+                );
         
-    });
-});  
+            });
+            
+        });
+    });  
 //---------------      End API Code       ---------------
 });
