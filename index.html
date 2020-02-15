@@ -17,11 +17,11 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-
   <!-- Link to Swiper.css for Horiz Scroll Effect -->
   <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css" />
+    
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
 
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
   
@@ -74,9 +74,9 @@
   <!--dropdown area-->
 
   <!-- tmdb genre id list:
-    excited/adventure = 12,funny/comedy = 35
+    excited/adventure = 12, funny/comedy = 35,
     emotional/drama = 18, happy/fantasy = 14, 
-    scary/horror = 27,	romance = 10749, 
+    scary/horror = 27, romance = 10749, 
     inspired/science fiction = 878  -->
 
   <div class="jumbotron searchbox bgjumbo">
@@ -101,13 +101,18 @@
   </div>
 
   <div class="row">
-    <div class="container swiper-container movies">
-   movies
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
+    <div class="container movies">
+      <!-- Swiper -->
+      <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
   </div>
+
 <!--recipe-->
+
   <div class="row">
     <div class="container description">
       <h2> Choose a recipe! </h2>
@@ -115,6 +120,12 @@
     </div>
   </div>
 
+  <!-- genre/food id list:
+    excited/adventure = tapas, funny/comedy = fried,
+    emotional/drama = pastries, happy/fantasy = fondue, 
+    scary/horror = tacos, romance = italian, 
+    inspired/science fiction = breakfast  -->
+    
   <div class="row">
     <div class="container recipes">
     recipes
@@ -129,6 +140,7 @@
 
     </div>
   </div>
+  <!-- Link to our JS -->
   <script src="assets/javascript/app.js"></script>
 
   <!-- Link to Swiper JS for Horiz Scroll Effect -->
