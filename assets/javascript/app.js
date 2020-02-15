@@ -88,10 +88,30 @@ $(document).ready(function() {
         
         // initializes dropdown selection as a var
         var x = $(this).val(); console.log(x);
+
+        // initializes blank food query for recipe/genre if statement below
+        var y = "";
         
+        // code to pair recipe query w/ genre dropdown selection
+        if (x === "12"){
+            y = "tapas";
+        } else if (x === "35") {
+            y = "fried";
+        } else if (x === "18") {
+            y = "pastries";
+        } else if (x === "14") {
+            y = "fondue";
+        } else if (x === "27") {
+            y = "tacos";
+        } else if (x === "10749") {
+            y = "italian";
+        } else if (x === "878") {
+            y = "breakfast";
+        }
+
         // recipe query url
         var edamamQuery = "https://api.edamam.com/search?q=" + 
-        x + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=10";
+        y + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=10";
 
         // tmdb query url
         var tmdbQuery = "https://api.themoviedb.org/3/discover/movie?api_key=" +
