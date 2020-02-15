@@ -17,11 +17,11 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-
   <!-- Link to Swiper.css for Horiz Scroll Effect -->
   <link rel="stylesheet" type="text/css" href="assets/css/swiper.min.css" />
+    
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
 
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
   
@@ -101,12 +101,16 @@
   </div>
 
   <div class="row">
-    <div class="container swiper-container movies">
-   movies
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
+    <div class="container movies">
+      <!-- Swiper -->
+      <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
     </div>
   </div>
+
 <!--recipe-->
   <div class="row">
     <div class="container description">
@@ -129,6 +133,7 @@
 
     </div>
   </div>
+  <!-- Link to our JS -->
   <script src="assets/javascript/app.js"></script>
 
   <!-- Link to Swiper JS for Horiz Scroll Effect -->
