@@ -58,7 +58,34 @@ $(document).ready(function() {
 
   //---------------    End Firebase Code    ---------------  
 
-    // Initializing Swiper for Movie Card Effect
+    // // Initializing Swiper for Movie Card Effect
+    // // credited to https://swiperjs.com/demos/
+    // var swiper = new Swiper('.swiper-container', {
+    //     effect: 'coverflow',
+    //     grabCursor: true,
+    //     centeredSlides: true,
+    //     slidesPerView: 'auto',
+    //     coverflowEffect: {
+    //       rotate: 50,
+    //       stretch: 0,
+    //       depth: 100,
+    //       modifier: 1,
+    //       slideShadows : true,
+    //     },
+    //     pagination: {
+    //       el: '.swiper-pagination',
+    //     },
+    // });
+
+    
+    //---------------         API Code        --------------- 
+    
+    // Event Listener for user dropdown selection
+    $("#myDropdown").on("change", function() {
+
+       
+        
+        // Initializing Swiper for Movie Card Effect
     // credited to https://swiperjs.com/demos/
     var swiper = new Swiper('.swiper-container', {
         effect: 'coverflow',
@@ -75,20 +102,20 @@ $(document).ready(function() {
         pagination: {
           el: '.swiper-pagination',
         },
+        initialSlide: 1
+
+
     });
+
     
-  //---------------         API Code        --------------- 
-
-    // Event Listener for user dropdown selection
-    $("#myDropdown").on("change", function() {
-
+   
         // empties containers so images dont stack
         $(".swiper-wrapper").empty();
-        $(".recipes").empty();
+        // $(".card-flip").empty();
         
         // initializes dropdown selection as a var
         var x = $(this).val(); console.log(x);
-
+        
         // initializes blank food query for recipe/genre if statement below
         var y = "";
         
@@ -108,16 +135,16 @@ $(document).ready(function() {
         } else if (x === "878") { // inspired/science fiction
             y = "breakfast";
         }
-
+        
         // recipe query url
         var edamamQuery = "https://api.edamam.com/search?q=" + 
         y + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=10";
-
+        
         // tmdb query url
         var tmdbQuery = "https://api.themoviedb.org/3/discover/movie?api_key=" +
         "0c26415454ad6b4927743c99caee27b5&language=en-US&sort_by=popularity.desc&include_adult=" +
-        "true&include_video=false&page=5&with_genres="+ x; //found a way to make it random by page # (n2h)
-
+        "true&include_video=false&page=3&with_genres="+ x; //found a way to make it random by page # (n2h)
+        
         
         // movie API call
         $.ajax({
@@ -155,9 +182,9 @@ $(document).ready(function() {
             database.push({
                 recipes: pRecipe,
             });
-            
-        });
 
+        });
+        
         // recipe API call
         $.ajax({
             url: edamamQuery,
@@ -173,27 +200,54 @@ $(document).ready(function() {
 
             // cycles through results + creates the following
             $.each(hits, function(index){
+
+                var cardFlipDiv = $("<div class='card-container card-flip'></div>")
+                var cardFlip = $("<div class='flip'></div>")
+                var frontCardDiv = $("<div class='front'></div>")
+                var backCardDiv = $("<div class='back'></div>")
                 
                 // creates new p tag for recipes
                 var recipeTitle = $("<p>");
-
-                // adds recipe title
                 recipeTitle.text(hits[index].recipe.label);
+                console.log(hits[index].recipe.label);
 
                 // creates new image tag 
                 var recipeImg = $("<img>");
-
-                // adds image path to src attr in img tag
                 recipeImg.attr("src", hits[index].recipe.image);
+                
+                // creates new p tag for recipes
+                var recipeTitle1 = $("<p>");
+                recipeTitle1.text(hits[index].recipe.label);
 
+
+                // var recipeIngred = $("<ul>");
+                
+                // console.log(hits.recipe.ingredientLines);
+                // $.each(hits.recipe.ingredientLines, function(index){
+                //     var ingredItem = $("<li>")
+                //     ingredItem.text(hits.recipe.ingredientLines[index]);
+                // })
+                
                 // appends both to html recipe div
-                recipeDiv.append(
+                frontCardDiv.append(
                     recipeTitle,
                     recipeImg
                 );
-        
-            });
-            
+
+                backCardDiv.append(
+                    recipeTitle1,
+                    // recipeIngred
+                );
+
+                cardFlip.append(
+                    frontCardDiv,
+                    backCardDiv
+                );
+
+                cardFlipDiv.append(cardFlip);
+                recipeDiv.append(cardFlipDiv);
+                    
+            });            
         });
     });  
 //---------------      End API Code       ---------------

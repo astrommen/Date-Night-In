@@ -20,11 +20,18 @@ a:hover {
     justify-content: center;
 }
 
+#myDropdown {
+    width: 30%;
+    text-align: center;
+    justify-content: center;
+}
+
 .dropwidth {
-    width: 65%;
+    width: 30%;
     background-color: #ffffff;
     color: #2B2D2F;
     border: 1px solid #2B2D2F;
+    justify-content: center;
 }
 
 .description {
@@ -42,6 +49,9 @@ a:hover {
 
 .recipes {
     border: 1px solid #2B2D2F;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
 }
 
 .bgjumbo {
@@ -50,7 +60,8 @@ a:hover {
     border: 1px solid #2B2D2F;
 }
 
-.swiper-container {
+.swiper-container,
+.card-container {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -61,4 +72,40 @@ a:hover {
     background-size: cover;
     width: 300px;
     height: 450px;
+}
+
+
+.card-flip {
+perspective: 1000px; 
+position:relative;
+margin: 5px;
+}
+
+.card-flip:hover .flip{
+transform: rotateY(180deg);
+}
+
+.flip {
+transition: 0.6s;
+transform-style: preserve-3d;
+position: relative;
+}
+
+.front,
+.back {
+width: 100%;
+height: 300px;
+backface-visibility: hidden;
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.front {
+z-index: 2;
+transform: rotateY(0deg);
+}
+
+.back {
+transform: rotateY(180deg);
 }
