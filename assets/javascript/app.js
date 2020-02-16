@@ -139,12 +139,15 @@ $(document).ready(function() {
         // recipe query url
         var edamamQuery = "https://api.edamam.com/search?q=" + 
         y + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=10";
-        
+
+        // page randomizer
+        var r = Math.floor(Math.random() * 20 + 1);
+
         // tmdb query url
         var tmdbQuery = "https://api.themoviedb.org/3/discover/movie?api_key=" +
         "0c26415454ad6b4927743c99caee27b5&language=en-US&sort_by=popularity.desc&include_adult=" +
-        "true&include_video=false&page=3&with_genres="+ x; //found a way to make it random by page # (n2h)
-        
+        "true&include_video=false&page=" + r + "&with_genres="+ x; //found a way to make it random by page # (n2h)
+
         
         // movie API call
         $.ajax({
