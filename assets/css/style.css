@@ -6,7 +6,7 @@ a {
     color: #ffffff;
 }
 
-a:hover {
+a:no(.card-link) :hover {
     color: darkred;
   }
 
@@ -48,10 +48,11 @@ a:hover {
 }
 
 .recipes {
-    border: 1px solid #2B2D2F;
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(2, auto);
+    /* margin-left: 1.5%; */
+    width:100%;
 }
 
 .bgjumbo {
@@ -60,8 +61,8 @@ a:hover {
     border: 1px solid #2B2D2F;
 }
 
-.swiper-container,
-.card-container {
+/* Movie Content */
+.swiper-container {
     width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -74,38 +75,70 @@ a:hover {
     height: 450px;
 }
 
-
-.card-flip {
-perspective: 1000px; 
-position:relative;
-margin: 5px;
+/* Recipe Content  */
+/* Card Styling */
+.flip{
+    width: 300px;
+    height: 340px;
+    margin: 5%;
+    justify-items: center;
+}
+.card-title {
+    text-align: center;
+    width:300px;
+    height:10%;
+    font-weight: bold;
+}
+.card-img {
+    width: 300px;
+    height: 90%;
 }
 
-.card-flip:hover .flip{
-transform: rotateY(180deg);
+.card-text{
+    text-align: center;
+}
+li{
+    font-size: .8rem;
+}
+.card-link:link, .decor {
+    text-decoration: none;
+}
+/* Card Effect */
+.card-flip {
+    perspective: 1000px;
+}
+
+.card-flip:hover .flip,
+.card-flip.hover .flip{
+    transform: rotateY(180deg);
+}
+
+.card-flip,
+.front,
+.back {
+    width: 100%;
+    height: 480px;
 }
 
 .flip {
-transition: 0.6s;
-transform-style: preserve-3d;
-position: relative;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
 }
 
 .front,
 .back {
-width: 100%;
-height: 300px;
-backface-visibility: hidden;
-position: absolute;
-top: 0;
-left: 0;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .front {
-z-index: 2;
-transform: rotateY(0deg);
+    z-index: 2;
+    transform: rotateY(0deg);
 }
 
 .back {
-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }

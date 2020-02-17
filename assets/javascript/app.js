@@ -111,7 +111,7 @@ $(document).ready(function() {
    
         // empties containers so images dont stack
         $(".swiper-wrapper").empty();
-        // $(".card-flip").empty();
+        $(".recipes").empty();
         
         // initializes dropdown selection as a var
         var x = $(this).val(); console.log(x);
@@ -134,11 +134,11 @@ $(document).ready(function() {
             y = "italian";
         } else if (x === "878") { // inspired/science fiction
             y = "breakfast";
-        }
+        };
         
         // recipe query url
         var edamamQuery = "https://api.edamam.com/search?q=" + 
-        y + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=10";
+        y + "&app_id=4063f31e&app_key=02c947260b3a28a9dace374d2233e77e&from=0&to=8";
 
         // page randomizer
         var r = Math.floor(Math.random() * 20 + 1);
@@ -202,56 +202,107 @@ $(document).ready(function() {
             var recipeDiv = $(".recipes");
 
             // cycles through results + creates the following
-            $.each(hits, function(index){
-
-                var cardFlipDiv = $("<div class='card-container card-flip'></div>")
-                var cardFlip = $("<div class='flip'></div>")
-                var frontCardDiv = $("<div class='front'></div>")
-                var backCardDiv = $("<div class='back'></div>")
-                
-                // creates new p tag for recipes
-                var recipeTitle = $("<p>");
-                recipeTitle.text(hits[index].recipe.label);
-                console.log(hits[index].recipe.label);
-
-                // creates new image tag 
-                var recipeImg = $("<img>");
-                recipeImg.attr("src", hits[index].recipe.image);
-                
-                // creates new p tag for recipes
-                var recipeTitle1 = $("<p>");
-                recipeTitle1.text(hits[index].recipe.label);
-
-
-                // var recipeIngred = $("<ul>");
-                
-                // console.log(hits.recipe.ingredientLines);
-                // $.each(hits.recipe.ingredientLines, function(index){
-                //     var ingredItem = $("<li>")
-                //     ingredItem.text(hits.recipe.ingredientLines[index]);
-                // })
-                
-                // appends both to html recipe div
-                frontCardDiv.append(
-                    recipeTitle,
-                    recipeImg
-                );
-
-                backCardDiv.append(
-                    recipeTitle1,
-                    // recipeIngred
-                );
-
-                cardFlip.append(
-                    frontCardDiv,
-                    backCardDiv
-                );
-
-                cardFlipDiv.append(cardFlip);
-                recipeDiv.append(cardFlipDiv);
+            $.each(hits, function(index){              
                     
-            });            
-        });
+                // unordered list for ingredients
+                var recipeIngred = $("<ul>");
+                
+                // assign ingredientLines to var for modularity
+                var hitsIndex = hits[index].recipe.ingredientLines;
+                console.log(hitsIndex); //for FTP only
+
+                    // cycles through ingredients to create the following
+                    $.each(hitsIndex, function(index){ 
+                        console.log(this); //for FTP only
+
+                        var ingredItem = $("<li>")
+                        
+                        ingredItem.text(this);
+                        
+                        recipeIngred.append(ingredItem);
+                    });
+
+                    var recipeCard = $(`<div class="col-sm-6 col-lg-4">
+                        <!-- Card Flip -->
+                        <div class="card-flip">
+                            <div class="flip">
+                                <div class="front">
+                                    <!-- front content -->
+                                    <div class="card">
+                                        <a href=${hits[index].recipe.url} class="card-link" target="_blank">
+                                            <div class="card-block">
+                                                <h4 class="card-title">
+                                                ${hits[index].recipe.label}
+                                                </h4>
+                                            </div>
+
+                                            <img class="card-img" src=${hits[index].recipe.image} alt="100%x300" data-holder-rendered="true">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <!-- back content -->
+                                    <div class="card">
+                                        <a href=${hits[index].recipe.url} class="card-link" target="_blank">
+                                            <div class="card-block">
+                                                <h4 class="card-title">
+                                                ${hits[index].recipe.label}
+                                                </h4>
+                                                <h6 class="card-subtitle text-muted">
+                                                Ingredients
+                                                </h6>
+                                            </div>
+                                            
+                                            <div class="card-block">
+                                            <p class="card-text">
+                                                <ul>
+                                                </ul>
+                                            </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Card Flip -->
+                    </div>`
+                    );
+
+                    recipeDiv.append(recipeCard);
+
+
+                    //ingredients to show on label click
+                // $(".recipeLabel").on("click", function() {
+                //     var state = $(this).attr("flip-state");
+                //     if(state === "front") {
+                //            cardFlip.empty();
+                //         cardFlip.append(
+                //             recipeTitle1,
+                //             recipeIngred
+                //         );
+                //         $(this).attr("flip-state", "back");
+                //     } else if (state === "back") {
+                //         cardFlip.empty();
+                //         cardFlip.append(
+                //             recipeTitle,
+                //             recipeImg
+                //         );
+                //         $(this).attr("flip-state", "front");
+                //     };
+                // });            
+                document.querySelector(".card-flip").classList.toggle("flip");
+                });
+                
+
+                
+                
+                
+                
+                
+                // Front();
+                // recipeDiv.append(cardFlip);
+                    
+        }); 
     });  
 //---------------      End API Code       ---------------
 });
