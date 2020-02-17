@@ -82,33 +82,29 @@ $(document).ready(function() {
     
     // Event Listener for user dropdown selection
     $("#myDropdown").on("change", function() {
-
-       
-        
-        // Initializing Swiper for Movie Card Effect
-    // credited to https://swiperjs.com/demos/
-    var swiper = new Swiper('.swiper-container', {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows : true,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-        },
-        initialSlide: 1
-
-
-    });
-
-    
    
+        // Initializing Swiper for Movie Card Effect
+        // credited to https://swiperjs.com/demos/
+        var swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true,
+            },
+            pagination: {
+            el: '.swiper-pagination',
+            },
+            initialSlide: 1
+
+
+        });
+
         // empties containers so images dont stack
         $(".swiper-wrapper").empty();
         $(".recipes").empty();
@@ -146,15 +142,13 @@ $(document).ready(function() {
         // tmdb query url
         var tmdbQuery = "https://api.themoviedb.org/3/discover/movie?api_key=" +
         "0c26415454ad6b4927743c99caee27b5&language=en-US&sort_by=popularity.desc&include_adult=" +
-        "true&include_video=false&page=" + r + "&with_genres="+ x; //found a way to make it random by page # (n2h)
-
-        
+        "true&include_video=false&page=" + r + "&with_genres="+ x; 
+       
         // movie API call
         $.ajax({
             url: tmdbQuery,
             method: "GET",
-        })
-        .then(function(response) { console.log(response);// for FTP only
+        }).then(function(response) { console.log(response);// for FTP only
             
             // assign API response results to var for modularity
             var results = response.results;
@@ -192,8 +186,7 @@ $(document).ready(function() {
         $.ajax({
             url: edamamQuery,
             method: "GET",
-        })
-        .then(function(response) { console.log(response);
+        }).then(function(response) { console.log(response);
             
             // assign API response to var for modularity
             var hits = response.hits;
@@ -211,98 +204,82 @@ $(document).ready(function() {
                 var hitsIndex = hits[index].recipe.ingredientLines;
                 console.log(hitsIndex); //for FTP only
 
-                    // cycles through ingredients to create the following
-                    $.each(hitsIndex, function(index){ 
-                        console.log(this); //for FTP only
+                // cycles through ingredients to create the following
+                $.each(hitsIndex, function(index){ 
+                    console.log(this); //for FTP only
 
-                        var ingredItem = $("<li>")
-                        
-                        ingredItem.text(this);
-                        
-                        recipeIngred.append(ingredItem);
-                    });
+                    var ingredItem = $("<li>")
+                    
+                    ingredItem.text(this);
+                    
+                    recipeIngred.append(ingredItem);
+                });
 
-                    var recipeCard = $(`<div class="col-sm-6 col-lg-4">
-                        <!-- Card Flip -->
-                        <div class="card-flip">
-                            <div class="flip">
-                                <div class="front">
-                                    <!-- front content -->
-                                    <div class="card">
-                                        <a href=${hits[index].recipe.url} class="card-link" target="_blank">
-                                            <div class="card-block">
-                                                <h4 class="card-title">
-                                                ${hits[index].recipe.label}
-                                                </h4>
-                                            </div>
+                // dynamically creates recipe card code block
+                // credit: https://codepen.io/IamManchanda/pen/zoaWdW?editors=1111 by IamMachanda
+                var recipeCard = $(`
+                <div class="col-sm-6 col-lg-4">
+                    <!-- Card Flip -->
+                    <div class="card-flip">
+                        <div class="flip">
+                            <div class="front">
+                                <!-- front content -->
+                                <div class="card">
+                                    
+                                    <a href=${hits[index].recipe.url} class="card-link" target="_blank">
+                                        
+                                        <div class="card-block">
+                                            <h4 class="card-title">
+                                            ${hits[index].recipe.label}
+                                            </h4>
+                                        </div>
 
-                                            <img class="card-img" src=${hits[index].recipe.image} alt="100%x300" data-holder-rendered="true">
-                                        </a>
-                                    </div>
+                                        <img class="card-img" src=${hits[index].recipe.image} alt="100%x300" data-holder-rendered="true">
+                                    
+                                    </a>
+                                
                                 </div>
-                                <div class="back">
-                                    <!-- back content -->
-                                    <div class="card">
-                                        <a href=${hits[index].recipe.url} class="card-link" target="_blank">
-                                            <div class="card-block">
-                                                <h4 class="card-title">
-                                                ${hits[index].recipe.label}
-                                                </h4>
-                                                <h6 class="card-subtitle text-muted">
-                                                Ingredients
-                                                </h6>
-                                            </div>
+                            </div>
+                            <div class="back">
+                                <!-- back content -->
+                                <div class="card">
+                                    
+                                    <a href=${hits[index].recipe.url} class="card-link" target="_blank">
+                                        
+                                        <div class="card-block">
+                                            <h4 class="card-title">
+                                            ${hits[index].recipe.label}
+                                            </h4>
                                             
-                                            <div class="card-block">
+                                            <h6 class="card-subtitle text-muted">
+                                            Ingredients
+                                            </h6>
+                                        </div>
+                                        
+                                        <div class="card-block"> 
                                             <p class="card-text">
                                                 <ul>
                                                 </ul>
                                             </p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                        </div>
+                                    
+                                    </a>
+                                
                                 </div>
                             </div>
                         </div>
-                        <!-- End Card Flip -->
-                    </div>`
-                    );
+                    </div>
+                    <!-- End Card Flip -->
+                </div>`
+                );
 
-                    recipeDiv.append(recipeCard);
-
-
-                    //ingredients to show on label click
-                // $(".recipeLabel").on("click", function() {
-                //     var state = $(this).attr("flip-state");
-                //     if(state === "front") {
-                //            cardFlip.empty();
-                //         cardFlip.append(
-                //             recipeTitle1,
-                //             recipeIngred
-                //         );
-                //         $(this).attr("flip-state", "back");
-                //     } else if (state === "back") {
-                //         cardFlip.empty();
-                //         cardFlip.append(
-                //             recipeTitle,
-                //             recipeImg
-                //         );
-                //         $(this).attr("flip-state", "front");
-                //     };
-                // });            
+                // appends recipe card to recipe row in html
+                recipeDiv.append(recipeCard);
+            
+                // card flip animation toggle 
                 document.querySelector(".card-flip").classList.toggle("flip");
-                });
-                
-
-                
-                
-                
-                
-                
-                // Front();
-                // recipeDiv.append(cardFlip);
-                    
-        }); 
-    });  
-//---------------      End API Code       ---------------
-});
+            
+            }); // end of ingredient list creation    
+        }); // end of recipe API response
+    });  //---------------      End API Code       ---------------
+}); // end of document ready function
