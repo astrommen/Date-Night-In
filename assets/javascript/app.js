@@ -196,24 +196,6 @@ $(document).ready(function() {
 
             // cycles through results + creates the following
             $.each(hits, function(index){              
-                    
-                // unordered list for ingredients
-                var recipeIngred = $("<ul>");
-                
-                // assign ingredientLines to var for modularity
-                var hitsIndex = hits[index].recipe.ingredientLines;
-                console.log(hitsIndex); //for FTP only
-
-                // cycles through ingredients to create the following
-                $.each(hitsIndex, function(index){ 
-                    console.log(this); //for FTP only
-
-                    var ingredItem = $("<li>")
-                    
-                    ingredItem.text(this);
-                    
-                    recipeIngred.append(ingredItem);
-                });
 
                 // dynamically creates recipe card code block
                 // credit: https://codepen.io/IamManchanda/pen/zoaWdW?editors=1111 by IamMachanda
@@ -258,8 +240,7 @@ $(document).ready(function() {
                                         
                                         <div class="card-block"> 
                                             <p class="card-text">
-                                                <ul>
-                                                </ul>
+                                                <ul></ul>
                                             </p>
                                         </div>
                                     
@@ -272,6 +253,24 @@ $(document).ready(function() {
                     <!-- End Card Flip -->
                 </div>`
                 );
+
+                // unordered list for ingredients
+                var recipeIngred = $("ul");
+                
+                // assign ingredientLines to var for modularity
+                var hitsIndex = hits[index].recipe.ingredientLines;
+                console.log(hitsIndex); //for FTP only
+
+                // cycles through ingredients to create the following
+                $.each(hitsIndex, function(index){ 
+                    console.log(this); //for FTP only
+
+                    var ingredItem = $("<li>"); 
+                    
+                    ingredItem.append(this); 
+                    
+                    recipeIngred.append(ingredItem);
+                });
 
                 // appends recipe card to recipe row in html
                 recipeDiv.append(recipeCard);
