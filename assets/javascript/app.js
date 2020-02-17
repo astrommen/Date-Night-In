@@ -108,6 +108,7 @@ $(document).ready(function() {
         // empties containers so images dont stack
         $(".swiper-wrapper").empty();
         $(".recipes").empty();
+        // $(".ingredList").empty();
         
         // initializes dropdown selection as a var
         var x = $(this).val(); console.log(x);
@@ -195,8 +196,10 @@ $(document).ready(function() {
             var recipeDiv = $(".recipes");
 
             // cycles through results + creates the following
-            $.each(hits, function(index){              
-
+            $.each(hits, function(index){   
+                
+                console.log(hits[index].recipe.ingredientLines);
+                
                 // dynamically creates recipe card code block
                 // credit: https://codepen.io/IamManchanda/pen/zoaWdW?editors=1111 by IamMachanda
                 var recipeCard = $(`
@@ -238,9 +241,11 @@ $(document).ready(function() {
                                             </h6>
                                         </div>
                                         
-                                        <div class="card-block"> 
+                                        <div class="card-block recipeIngred"> 
                                             <p class="card-text">
-                                                <ul></ul>
+                                                <ul class="ingredList">
+                                                ${hits[index].recipe.ingredientLines}
+                                                </ul>
                                             </p>
                                         </div>
                                     
@@ -254,23 +259,25 @@ $(document).ready(function() {
                 </div>`
                 );
 
-                // unordered list for ingredients
-                var recipeIngred = $("ul");
+                // // unordered list for ingredients
+                // var recipeIngred = $("ul");
                 
-                // assign ingredientLines to var for modularity
-                var hitsIndex = hits[index].recipe.ingredientLines;
-                console.log(hitsIndex); //for FTP only
+                // // assign ingredientLines to var for modularity
+                // var hitsIndex = hits[index].recipe.ingredients;
+                // // console.log(hitsIndex.toString()); //for FTP only
 
-                // cycles through ingredients to create the following
-                $.each(hitsIndex, function(index){ 
-                    console.log(this); //for FTP only
-
-                    var ingredItem = $("<li>"); 
+                // $(".ingredList").append(hits[index].recipe.ingredientLines);
+                // // cycles through ingredients to create the following
+                // for (i=0; i<response.hits[index].recipe.ingredientLines.length; i++) {
                     
-                    ingredItem.append(this); 
+                //     console.log(i);  //for FTP only
                     
-                    recipeIngred.append(ingredItem);
-                });
+                //     var ingredItem = $("<li>"); 
+                    
+                //     ingredItem.append(element); 
+                    
+                //     $(".ingredList").append(ingredItem);
+                // };
 
                 // appends recipe card to recipe row in html
                 recipeDiv.append(recipeCard);
@@ -278,7 +285,7 @@ $(document).ready(function() {
                 // card flip animation toggle 
                 document.querySelector(".card-flip").classList.toggle("flip");
             
-            }); // end of ingredient list creation    
+            }); // end of recipe card creation    
         }); // end of recipe API response
     });  //---------------      End API Code       ---------------
 }); // end of document ready function

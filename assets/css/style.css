@@ -98,12 +98,20 @@ a:no(.card-link) :hover {
 .card-text{
     text-align: center;
 }
-li{
+
+ul,li{
     font-size: .8rem;
+    color: #2B2D2F;
 }
 .card-link:link, .decor {
     text-decoration: none;
 }
+
+.recipeIngred {
+    /* height: 270px; */
+    overflow: auto;
+}
+
 /* Card Effect */
 .card-flip {
     perspective: 1000px;
