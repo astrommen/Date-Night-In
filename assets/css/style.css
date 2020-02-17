@@ -97,11 +97,11 @@ a:no(.card-link) :hover {
 
 .card-text{
     text-align: center;
+    color: #2B2D2F;
 }
 
 ul,li{
     font-size: .8rem;
-    color: #2B2D2F;
 }
 .card-link:link, .decor {
     text-decoration: none;

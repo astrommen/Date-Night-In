@@ -108,7 +108,6 @@ $(document).ready(function() {
         // empties containers so images dont stack
         $(".swiper-wrapper").empty();
         $(".recipes").empty();
-        // $(".ingredList").empty();
         
         // initializes dropdown selection as a var
         var x = $(this).val(); console.log(x);
@@ -198,88 +197,87 @@ $(document).ready(function() {
             // cycles through results + creates the following
             $.each(hits, function(index){   
                 
-                console.log(hits[index].recipe.ingredientLines);
-                
                 // dynamically creates recipe card code block
                 // credit: https://codepen.io/IamManchanda/pen/zoaWdW?editors=1111 by IamMachanda
-                var recipeCard = $(`
-                <div class="col-sm-6 col-lg-4">
+                var recipeCard = $(`<div class="col-sm-6 col-lg-4"></div>`);
+                
+                var cardFlip = $(`
                     <!-- Card Flip -->
                     <div class="card-flip">
-                        <div class="flip">
-                            <div class="front">
-                                <!-- front content -->
-                                <div class="card">
-                                    
-                                    <a href=${hits[index].recipe.url} class="card-link" target="_blank">
-                                        
-                                        <div class="card-block">
-                                            <h4 class="card-title">
-                                            ${hits[index].recipe.label}
-                                            </h4>
-                                        </div>
+                    </div>
+                `);
 
-                                        <img class="card-img" src=${hits[index].recipe.image} alt="100%x300" data-holder-rendered="true">
-                                    
-                                    </a>
+                var flip = $(`<div class="flip"></div>`); console.log(flip);
+
+                var cardFront = $(`
+                    <div class="front">
+                        <!-- front content -->
+                        <div class="card">
+                            
+                            <a href=${hits[index].recipe.url} class="card-link" target="_blank">
                                 
+                                <div class="card-block">
+                                    <h4 class="card-title">
+                                        ${hits[index].recipe.label}
+                                    </h4>
                                 </div>
-                            </div>
-                            <div class="back">
-                                <!-- back content -->
-                                <div class="card">
-                                    
-                                    <a href=${hits[index].recipe.url} class="card-link" target="_blank">
-                                        
-                                        <div class="card-block">
-                                            <h4 class="card-title">
-                                            ${hits[index].recipe.label}
-                                            </h4>
-                                            
-                                            <h6 class="card-subtitle text-muted">
-                                            Ingredients
-                                            </h6>
-                                        </div>
-                                        
-                                        <div class="card-block recipeIngred"> 
-                                            <p class="card-text">
-                                                <ul class="ingredList">
-                                                ${hits[index].recipe.ingredientLines}
-                                                </ul>
-                                            </p>
-                                        </div>
-                                    
-                                    </a>
-                                
-                                </div>
-                            </div>
+
+                                <img class="card-img" src=${hits[index].recipe.image} alt="100%x300" data-holder-rendered="true">
+                            
+                            </a>
+                        
                         </div>
                     </div>
-                    <!-- End Card Flip -->
-                </div>`
-                );
+                    `);
 
-                // // unordered list for ingredients
-                // var recipeIngred = $("ul");
+                var cardBack = $(`
+                    <div class="back">
+                    <!-- back content -->
+                    <div class="card">
+                    
+                        <a href=${hits[index].recipe.url} class="card-link" target="_blank">
+                            
+                            <div class="card-block">
+                                <h4 class="card-title">
+                                    ${hits[index].recipe.label}
+                                </h4>
+                                
+                                <h6 class="card-subtitle text-muted">
+                                    Ingredients
+                                </h6>
+                            </div>
+
+                        </a>
                 
-                // // assign ingredientLines to var for modularity
-                // var hitsIndex = hits[index].recipe.ingredients;
-                // // console.log(hitsIndex.toString()); //for FTP only
+                    </div>
+                `);
 
-                // $(".ingredList").append(hits[index].recipe.ingredientLines);
-                // // cycles through ingredients to create the following
-                // for (i=0; i<response.hits[index].recipe.ingredientLines.length; i++) {
-                    
-                //     console.log(i);  //for FTP only
-                    
-                //     var ingredItem = $("<li>"); 
-                    
-                //     ingredItem.append(element); 
-                    
-                //     $(".ingredList").append(ingredItem);
-                // };
+                var cardList = $("<div class='card-block recipeIngred'></div>");
+                // End of recipe card html tags
 
-                // appends recipe card to recipe row in html
+                // creates unordered list for each recipe
+                var list = $("<ul>");
+                
+                // assigned ingredients tree to var for modularity
+                var hitsList = hits[index].recipe.ingredients; console.log(hitsList.length);
+                
+                // cycles through ingredients to create the following
+                for (i=0; i< hitsList.length; i++) {
+                    
+                    var ingredItem = $("<li>" + hitsList[i].text + "</li>"); 
+                    console.log(hitsList[i].text);
+                    list.append(ingredItem);
+                };
+
+                cardList.append(list);
+                
+                // appends card content to html DOM
+                cardBack.append(cardList);
+                flip.append(
+                    cardFront,
+                    cardBack);
+                cardFlip.append(flip);
+                recipeCard.append(cardFlip);
                 recipeDiv.append(recipeCard);
             
                 // card flip animation toggle 
